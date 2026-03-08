@@ -1,0 +1,14 @@
+pyautogui
+opencv-python
+numpy
+pywin32
+Pillow
+winrt-runtime
+winrt-Windows.Media.Ocr
+winrt-Windows.Graphics.Imaging
+winrt-Windows.Storage.Streams
+PyQt6
+openai
+pyperclip
+pandas
+psutil

@@ -1,0 +1,24 @@
+{
+  "interval": 2,
+  "slot": 0,
+  "strategy": "openai",
+  "history_rounds": 10,
+  "non_text_action": 1,
+  "openai": {
+    "key": "sk-*****************",
+    "url": "https://dashscope.aliyuncs.com/compatible-mode/v1",
+    "model": "qwen-plus",
+    "system": "我在做一个实验，需要你代替我回复微信消息。请保持回复友好、自然，符合日常聊天的语气。\n规则：\n1.只告诉我需要回复的内容，不需要其他任何多余的输出。\n2. 回复要口语化，尽可能简短。"
+  },
+  "keywords": [
+    [
+      "你好",
+      "你好"
+    ]
+  ],
+  "user_info": {
+    "nickname": "黑夜在笑我癫狂",
+    "avatar_path": "user_avatar.png",
+    "avatar_hash": "b4e46e962b112346"
+  }
+}
