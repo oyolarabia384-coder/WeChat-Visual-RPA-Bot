@@ -1,26 +1,5 @@
-WeChat-Visual-RPA-Bot
+WeChat-Visual-RPA-Bot🤖 基于纯视觉与状态机的微信 PC 端自动化回复机器人 (零 Hook / 零注入)🌟 项目亮点 (Project Highlights)市面上大多数微信机器人采用内存注入（Hook）或协议破解，这在腾讯日益严苛的风控下极易导致封号。本项目另辟蹊径，探索一种 100% 账号安全 的纯视觉 RPA（机器人流程自动化）方案。本项目不仅是一个简单的脚本，它在架构上攻克了视觉自动化的三大顽疾：🛡️ 状态机回退机制 (Action -> Verify -> Rollback)：彻底解决 UI 动态位移（如新消息弹窗、窗口拉伸）导致的点击偏差。程序在点击后会即时校验状态，若识别失败则自动发送 ESC 恢复现场，重新定位坐标。🧠 视觉指纹记忆系统 (dHash Cache)：利用 dHash (差异哈希) 算法，首次识别联系人后将其头像及昵称区域图像存入 SQLite。后续交互实现 0.01s 极速认人，免除繁琐的物理点击与 OCR 过程。拼接级消息去重算法：针对长聊天记录，利用 PageUp / PageDown 结合 数组滑动窗口对比，完美解决翻页过程中的消息重叠与漏检，确保对话上下文的绝对完整。🧵 高性能异步驱动：底层基于 asyncio 异步循环，UI 层采用 PyQt6 的 pyqtSignal 跨线程通信，确保后台高强度视觉扫描时，前端界面始终流畅响应。🛠️ 技术栈 (Tech Stack)GUI: PyQt6Computer Vision: OpenCV-Python, PILOCR: Windows.Media.Ocr (系统原生支持，无需额外安装引擎)Automation: PyAutoGUI, PyperclipData: SQLite3 (含双哈希指纹校验)AI: OpenAI API / OpenRouter (灵活接入各种大语言模型)📬 交流与合作 (Connect with me)如果你对 自动化 RPA 开发、AI 智能体 (Agent) 落地 或 复杂 UI 状态机架构 感兴趣，欢迎交流探讨。目前承接 RPA 流程优化、企业级自动化工具定制 等业务。联系方式详情微信 (WeChat)扫码下方二维码（请备注 GitHub RPA）Telegram@dandan9977<div align="center"><img src="qr_code.jpg" width="220" title="扫码添加微信"><p><i>💡 微信扫码时请务必备注来自 GitHub</i></p></div>⚠️ 已知局限性 (Limitations)独占性：由于涉及真实的物理鼠标与键盘操作，运行时建议在 虚拟机 (VMware) 或闲置的 Windows 小主机中挂机。环境依赖：本项目强依赖 Windows 系统的 DPI 缩放（推荐 100% 或 125%），坐标基准基于特定分辨率，使用者可能需要根据微调 Scanner.py。仅供学习：本项目为概念验证 (Proof of Concept)，不建议用于大规模商业骚扰。⚖️ 许可证 (License)本项目采用 MIT License。你可以自由地使用、修改和分发代码，但请保留原作者版权声明。⚠️ 免责声明：本项目仅供技术交流与架构思维探讨。作者不对任何因操作不当或微信版本更新导致的账号限制、数据丢失负责。
 
-🤖 基于纯视觉与状态机的微信 PC 端自动化回复机器人 (零 Hook/零注入)
-
-🌟 项目亮点 (Why this project?)
-市面上的微信机器人多采用内存注入或协议破解，面临极高的封号风险。本项目旨在探索一种 100% 账号安全的纯视觉 RPA（机器人流程自动化）方案。
-
-本项目不仅仅是一个简单的“截图找色”脚本，它在架构上解决纯视觉自动化的几个核心痛点：
-
-状态机回退机制 (Action -> Verify -> Rollback)：彻底解决微信 UI 动态位移、新消息弹窗导致的鼠标点击偏移问题。如果点击失败，程序会自动发送 ESC 恢复现场并重新锁定坐标。
-
-图像 dHash 指纹缓存：首次识别联系人后，将其头像及昵称图片转化为 64 位哈希值存入 SQLite。后续消息实现“0延迟”极速免 OCR 认人。
-
-跨页消息去重叠算法：利用 PageUp/PageDown 结合数组滑动窗口对比，完美解决长消息截图时的首尾重叠与遗漏问题。
-
-UI 与 业务线程解耦：基于 PyQt6 的 pyqtSignal 跨线程通信，保证后台视觉扫描时 GUI 界面流畅不卡死。
-
-⚠️ 已知局限性 (Limitations)
-由于是纯物理 UI 操作，运行时需要独占鼠标和键盘。建议在虚拟机 (VMware/Ubuntu) 或闲置的 Windows 小主机中挂机运行。
-
-强依赖 Windows 系统的 DPI 缩放与分辨率，如果你要运行，可能需要微调 Scanner.py 中的部分基准坐标。
-
-这个项目是我在 AI 与自动化结合领域的一次深度架构推演（Proof of Concept）。欢迎对 RPA、状态机控制和计算机视觉感兴趣的朋友交流探讨！
 ## 1. 初始化流程
 
 ### 1.1 微信窗口定位
