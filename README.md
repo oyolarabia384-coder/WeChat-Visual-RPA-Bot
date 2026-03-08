@@ -1,5 +1,56 @@
-WeChat-Visual-RPA-Bot🤖 基于纯视觉与状态机的微信 PC 端自动化回复机器人 (零 Hook / 零注入)🌟 项目亮点 (Project Highlights)市面上大多数微信机器人采用内存注入（Hook）或协议破解，这在腾讯日益严苛的风控下极易导致封号。本项目另辟蹊径，探索一种 100% 账号安全 的纯视觉 RPA（机器人流程自动化）方案。本项目不仅是一个简单的脚本，它在架构上攻克了视觉自动化的三大顽疾：🛡️ 状态机回退机制 (Action -> Verify -> Rollback)：彻底解决 UI 动态位移（如新消息弹窗、窗口拉伸）导致的点击偏差。程序在点击后会即时校验状态，若识别失败则自动发送 ESC 恢复现场，重新定位坐标。🧠 视觉指纹记忆系统 (dHash Cache)：利用 dHash (差异哈希) 算法，首次识别联系人后将其头像及昵称区域图像存入 SQLite。后续交互实现 0.01s 极速认人，免除繁琐的物理点击与 OCR 过程。拼接级消息去重算法：针对长聊天记录，利用 PageUp / PageDown 结合 数组滑动窗口对比，完美解决翻页过程中的消息重叠与漏检，确保对话上下文的绝对完整。🧵 高性能异步驱动：底层基于 asyncio 异步循环，UI 层采用 PyQt6 的 pyqtSignal 跨线程通信，确保后台高强度视觉扫描时，前端界面始终流畅响应。🛠️ 技术栈 (Tech Stack)GUI: PyQt6Computer Vision: OpenCV-Python, PILOCR: Windows.Media.Ocr (系统原生支持，无需额外安装引擎)Automation: PyAutoGUI, PyperclipData: SQLite3 (含双哈希指纹校验)AI: OpenAI API / OpenRouter (灵活接入各种大语言模型)📬 交流与合作 (Connect with me)如果你对 自动化 RPA 开发、AI 智能体 (Agent) 落地 或 复杂 UI 状态机架构 感兴趣，欢迎交流探讨。目前承接 RPA 流程优化、企业级自动化工具定制 等业务。联系方式详情微信 (WeChat)扫码下方二维码（请备注 GitHub RPA）Telegram@dandan9977<div align="center"><img src="qr_code.jpg" width="220" title="扫码添加微信"><p><i>💡 微信扫码时请务必备注来自 GitHub</i></p></div>⚠️ 已知局限性 (Limitations)独占性：由于涉及真实的物理鼠标与键盘操作，运行时建议在 虚拟机 (VMware) 或闲置的 Windows 小主机中挂机。环境依赖：本项目强依赖 Windows 系统的 DPI 缩放（推荐 100% 或 125%），坐标基准基于特定分辨率，使用者可能需要根据微调 Scanner.py。仅供学习：本项目为概念验证 (Proof of Concept)，不建议用于大规模商业骚扰。⚖️ 许可证 (License)本项目采用 MIT License。你可以自由地使用、修改和分发代码，但请保留原作者版权声明。⚠️ 免责声明：本项目仅供技术交流与架构思维探讨。作者不对任何因操作不当或微信版本更新导致的账号限制、数据丢失负责。
+🤖 WeChat-Visual-RPA-Bot
+基于纯视觉与状态机的微信 PC 端自动化回复机器人 (零 Hook / 零注入)
+🌟 项目亮点
+本项目不仅仅是一个简单的脚本，它通过本地视觉识别充分节省TOKEN,在架构上攻克了视觉自动化的三大顽疾：
 
+🛡️ 状态机回退机制 (Action -> Verify -> Rollback)
+彻底解决 UI 动态弹窗、窗口位移导致的点击偏差。程序在点击后会即时校验状态，若识别失败则自动发送 ESC 恢复现场并重新定位。
+
+🧠 隐形视觉记忆系统 (dHash Cache)
+利用 dHash (差异哈希) 算法，首次识别联系人后将其头像及昵称区域图像存入 SQLite。实现 0.01s 极速认人，免除繁琐的物理点击与 OCR 过程。
+
+🧩 拼接级消息去重算法
+针对长聊天记录，利用 PageUp / PageDown 结合 漂流滑动窗口对比，完美解决翻页过程中的消息重叠与漏检。
+
+🧵 高性能异步驱动
+底层基于 asyncio 异步循环，UI 层采用 PyQt6 的 pyqtSignal 跨线程通信，确保后台高强度视觉扫描时，界面持续稳定响应。
+
+🛠️ 技术栈 (Tech Stack)
+GUI: PyQt6
+
+Computer Vision: OpenCV-Python, PIL
+
+OCR: Windows.Media.Ocr (系统原生支持，无需额外安装引擎)
+
+Automation: PyAutoGUI, Pyperclip
+
+Data: SQLite3 (含双通道指纹验证)
+
+AI: OpenAI API / OpenRouter (支持接入各种大语言模型)
+
+📬 交流与合作
+如果您对自动化 RPA 开发、AI 智能体 (Agent) 落地或复杂 UI 状态机架构感兴趣，欢迎交流探讨。目前承接 RPA 流程优化、企业级自动化工具定制等业务。
+
+Telegram: @dandan9977
+
+微信 (WeChat): 扫描下方二维码 (请备注 GitHub RPA)
+
+<div align="center">
+<img src="qr_code.jpg" width="220" title="扫码添加微信">
+<p><i>💡 微信扫码时请务必备注来自 GitHub</i></p>
+</div>
+
+⚠️ 已知限制
+独占性：由于涉及真实的物理鼠标与键盘操作，运行时建议在 虚拟机 (VMware) 或闲置的 Windows 小主机中挂机。
+
+环境依赖：强依赖 Windows 系统的 DPI 缩放 (推荐 100% 或 125%)，坐标基准基于特定分辨率，使用者可能需要根据 Scanner.py 进行微调。
+
+青少年学习：本项目为概念验证 (Proof of Concept)，不建议用于大规模商业骚扰。
+
+⚖️ 许可证与免责声明
+许可证 (License): 本项目采用 MIT 许可证。您可以自由地使用、修改和分发代码，但请保留原作者版权声明。
+
+免责声明: 本项目仅用于技术交流与架构思维探讨。作者不对任何因操作不当或微信版本更新导致的账号限制、数据损失负责。
 ## 1. 初始化流程
 
 ### 1.1 微信窗口定位
